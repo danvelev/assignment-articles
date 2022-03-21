@@ -1,0 +1,50 @@
+version: '3.9'
+
+services:
+ nginx:
+  image: nginx:stable-alpine
+  ports:
+   - "8088:80"
+  volumes:
+   - .:/var/www/app
+   - ./docker/nginx/app.conf:/etc/nginx/conf.d/default.conf
+  depends_on:
+   - mysql
+   - php
+  networks:
+   - laravel
+
+ mysql:
+  image: mysql:5.7.37
+  restart: unless-stopped
+  ports:
+   - "4406:3306"
+  volumes:
+   - ./msqldata:/var/lib/mysql
+  environment:
+   - MYSQL_DATABASE=localdb
+   - MYSQL_USER=dbuser
+   - MYSQL_PASSWORD=password
+   - MYSQL_ROOT_PASSWORD=password
+   - SERVICE_NAME=mysql
+   - SERVICE_TAGS=dev
+  networks:
+   - laravel
+
+ php:
+  build:
+   context: .
+  container_name: php
+  volumes:
+   - .:/var/www/app
+  ports:
+   - "9000:9000"
+  depends_on:
+   - mysql
+  networks:
+   - laravel
+
+
+networks:
+ laravel:
+  driver: bridge
