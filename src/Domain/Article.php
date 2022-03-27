@@ -12,11 +12,6 @@ use Src\Domain\ValueObjects\Content;
 
 class Article
 {
-    /**
-     * @var Collection<Comment> $comments
-     */
-    private Collection $comments;
-
 
     public function __construct(
         private ArticleId $id,
@@ -70,26 +65,6 @@ class Article
     public function datePublished(): DateTime
     {
         return $this->datePublished;
-    }
-
-    /**
-     * @return Collection<Comment>
-     */
-    public function comments(): Collection
-    {
-        return $this->comments;
-    }
-
-    public function publishedComments(): Collection
-    {
-        return $this->comments->filter(function (Comment $comment) {
-            return $comment->isPublished();
-        });
-    }
-
-    public function addComment(Comment $comment): void
-    {
-        $this->comments[] = $comment;
     }
 
 }
