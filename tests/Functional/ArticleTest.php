@@ -10,7 +10,7 @@ class ArticleTest extends TestCase
     const ARTICLE_JSON = [
         'title',
         'content',
-        'author',
+        'author_id',
         'dateCreated'
     ];
 
