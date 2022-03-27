@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Src\Domain;
 
-use App\Models\User;
 use DateTime;
-use Illuminate\Support\Collection;
 use Src\Domain\ValueObjects\ArticleId;
 use Src\Domain\ValueObjects\Content;
 
