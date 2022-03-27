@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Src\Domain;
 
-use App\Models\User;
 use Src\Domain\ValueObjects\CommentId;
 
 class Comment
@@ -16,6 +15,7 @@ class Comment
         private CommentId $id,
         private string $message,
         private User $visitor,
+        private Article $article,
         private string $state
     ) { }
 
@@ -38,9 +38,17 @@ class Comment
     /**
      * @return User
      */
-    public function writer(): User
+    public function visitor(): User
     {
         return $this->visitor;
+    }
+
+    /**
+     * @return Article
+     */
+    public function article(): Article
+    {
+        return $this->article;
     }
 
     /**
@@ -61,9 +69,9 @@ class Comment
         $this->state = self::STATE_PUBLISH;
     }
 
-    public static function make(CommentId $id, string $message, User $writer): Comment
+    public static function make(CommentId $id, string $message, User $visitor, Article $article): Comment
     {
-        return new Comment($id, $message, $writer, self::STATE_DRAFT);
+        return new Comment($id, $message, $visitor, $article, self::STATE_DRAFT);
     }
 
 
