@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Src\Application\Exceptions\ArticleNotFoundException;
 use Src\Application\Repositories\ArticleRepository;
 use Src\Domain\Article;
+use Src\Domain\User;
 use Src\Domain\ValueObjects\ArticleId;
 use Src\Domain\ValueObjects\Content;
+use Src\Domain\ValueObjects\UserId;
 
 class EloquentArticleRepository implements ArticleRepository
 {
@@ -23,11 +25,14 @@ class EloquentArticleRepository implements ArticleRepository
         try {
             $article = $this->eloquentArticleModel::query()->findOrFail($articleId);
 
+            // TODO: Introduce DTO
+            $author = new User(new UserId($article->author->id), $article->author->name, $article->author->email);
+
             return new Article(
                 new ArticleId($article->id),
                 $article->title,
                 new Content($article->content),
-                $article->author,
+                $author,
                 $article->created_at,
                 $article->published_at
             );
