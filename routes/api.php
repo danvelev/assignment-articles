@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Src\Presentation\Controllers\GetArticleByIdController;
+use Src\Presentation\Controllers\CommentIntendedController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('article/{articleId}', GetArticleByIdController::class)
     ->name('GET article/{articleId}');
+
+Route::post('comment/intended', CommentIntendedController::class)
+    ->name('POST comment/intended');
