@@ -2,7 +2,7 @@
 
 namespace Tests\Functional;
 
-use Illuminate\Testing\Fluent\AssertableJson;
+use App\Models\Article;
 use Tests\TestCase;
 
 class ArticleTest extends TestCase
@@ -16,7 +16,9 @@ class ArticleTest extends TestCase
 
     public function testJsonResponseGetArticleById()
     {
-        $response = $this->getJson('/api/article/1');
+        $article = Article::factory()->create();
+
+        $response = $this->getJson(route('get.article.by.id', $article->id));
 
         $response->assertJsonStructure(self::ARTICLE_JSON);
     }
