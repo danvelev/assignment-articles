@@ -12,7 +12,7 @@ class Comment extends Model
 
     protected $fillable = [
         'message',
-        'visitor',
+        'user_id',
         'date_created',
         'date_published'
     ];
