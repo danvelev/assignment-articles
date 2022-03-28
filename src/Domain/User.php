@@ -35,4 +35,13 @@ class User
     {
         return $this->email;
     }
+
+    public static function make(int $userId, string $name, string $email)
+    {
+        return new self(
+            new UserId($userId),
+            $name,
+            $email
+        );
+    }
 }
