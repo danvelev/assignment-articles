@@ -22,8 +22,8 @@ class EloquentUserRepository implements UserRepository
         try {
             $user = $this->eloquentUserModel::query()->findOrFail($userId);
 
-            return new User(
-                new UserId($user->id),
+            return User::make(
+                $user->id,
                 $user->name,
                 $user->email
             );
