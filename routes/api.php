@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('article/{articleId}', GetArticleByIdController::class)
-    ->name('GET article/{articleId}');
+    ->name('get.article.by.id');
 
 Route::post('comment/intended', CommentIntendedController::class)
-    ->name('POST comment/intended');
+    ->name('comment.intended');
