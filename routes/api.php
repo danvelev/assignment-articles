@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Src\Presentation\Controllers\PublishCommentController;
 use Src\Presentation\Controllers\GetArticleByIdController;
 use Src\Presentation\Controllers\CommentIntendedController;
 
@@ -25,3 +26,6 @@ Route::get('article/{articleId}', GetArticleByIdController::class)
 
 Route::post('comment/intended', CommentIntendedController::class)
     ->name('comment.intended');
+
+Route::post('comment/publish', PublishCommentController::class)
+    ->name('comment.publish');
