@@ -2,12 +2,17 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\ServiceProvider;
+use Src\Application\Commands\CommentPublishedCommand;
+use Src\Application\Handlers\CommentPublishedHandler;
 use Src\Application\Repositories\ArticleRepository;
 use Src\Application\Repositories\CommentIntentionRepository;
+use Src\Application\Repositories\CommentRepository;
 use Src\Application\Repositories\UserRepository;
 use Src\Infrastructure\Repositories\EloquentArticleRepository;
 use Src\Infrastructure\Repositories\EloquentCommentIntentionRepository;
+use Src\Infrastructure\Repositories\EloquentCommentRepository;
 use Src\Infrastructure\Repositories\EloquentUserRepository;
 
 class AppServiceProvider extends ServiceProvider
@@ -33,6 +38,11 @@ class AppServiceProvider extends ServiceProvider
             CommentIntentionRepository::class,
             EloquentCommentIntentionRepository::class
         );
+
+        $this->app->bind(
+            CommentRepository::class,
+            EloquentCommentRepository::class
+        );
     }
 
     /**
@@ -42,6 +52,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Bus::map([
+            CommentPublishedCommand::class => CommentPublishedHandler::class,
+        ]);
     }
 }
