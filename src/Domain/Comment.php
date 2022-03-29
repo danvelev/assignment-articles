@@ -69,9 +69,15 @@ class Comment
         $this->state = self::STATE_PUBLISH;
     }
 
-    public static function make(CommentId $id, string $message, User $visitor, Article $article): Comment
+    public static function make(int $id, string $message, User $visitor, Article $article): Comment
     {
-        return new Comment($id, $message, $visitor, $article, self::STATE_DRAFT);
+        return new Comment(
+            new CommentId($id),
+            $message,
+            $visitor,
+            $article,
+            self::STATE_PUBLISH
+        );
     }
 
 
