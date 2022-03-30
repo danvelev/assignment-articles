@@ -4,7 +4,6 @@ namespace Src\Application\Handlers;
 
 use Src\Application\Commands\CommentPublishedCommand;
 use Src\Application\Repositories\CommentIntentionRepository;
-use Src\Domain\CommentIntention;
 
 class CommentPublishedHandler
 {
