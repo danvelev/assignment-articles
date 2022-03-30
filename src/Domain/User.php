@@ -36,7 +36,7 @@ class User
         return $this->email;
     }
 
-    public static function make(int $userId, string $name, string $email)
+    public static function make(int $userId, string $name, string $email): self
     {
         return new self(
             new UserId($userId),
