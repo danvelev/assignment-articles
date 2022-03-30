@@ -10,7 +10,8 @@ class EloquentCommentIntentionRepository implements CommentIntentionRepository
 {
     public function __construct(
         private EloquentCommentIntentionModel $eloquentCommentIntentionModel
-    ) { }
+    ) {
+    }
 
     public function save(CommentIntention $commentIntention): void
     {

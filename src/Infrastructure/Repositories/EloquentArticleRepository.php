@@ -12,7 +12,8 @@ use Src\Domain\User;
 class EloquentArticleRepository implements ArticleRepository
 {
     public function __construct(private EloquentArticleModel $eloquentArticleModel)
-    { }
+    {
+    }
 
     /**
      * @throws ArticleNotFoundException
@@ -34,7 +35,7 @@ class EloquentArticleRepository implements ArticleRepository
             );
         } catch (ModelNotFoundException $exception) {
             throw new ArticleNotFoundException(
-                sprintf("No articles found with %d ", $articleId), 404);
+                sprintf('No articles found with %d ', $articleId), 404);
         }
     }
 

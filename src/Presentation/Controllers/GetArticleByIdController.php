@@ -12,9 +12,9 @@ use Src\Presentation\Transformers\ArticleTransformer;
 
 class GetArticleByIdController extends AbstractController
 {
-
     public function __construct(private ArticleRepository $articleRepository)
-    { }
+    {
+    }
 
     public function __invoke(int $articleId): JsonResponse
     {
@@ -23,8 +23,7 @@ class GetArticleByIdController extends AbstractController
             $article = $viewArticle->findArticleById($articleId);
 
             $response = Response::json(ArticleTransformer::transform($article));
-
-        } catch(ArticleNotFoundException $exception) {
+        } catch (ArticleNotFoundException $exception) {
             $response = Response::json([
                 'error_message' => $exception->getMessage(),
                 'error_code' => 'no_article_found',

@@ -9,10 +9,10 @@ use Src\Domain\User;
 
 class CommentIntentService
 {
-
     public function __construct(
         private CommentIntentionRepository $commentIntentionRepository
-    ) { }
+    ) {
+    }
 
     public function saveCommentIntent(User $visitor, Article $article): void
     {
@@ -20,5 +20,4 @@ class CommentIntentService
 
         $this->commentIntentionRepository->save($commentIntention);
     }
-
 }

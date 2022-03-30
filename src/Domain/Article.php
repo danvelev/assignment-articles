@@ -10,7 +10,6 @@ use Src\Domain\ValueObjects\Content;
 
 class Article
 {
-
     public function __construct(
         private ArticleId $id,
         private string $title,
@@ -18,7 +17,8 @@ class Article
         private User $author,
         private DateTime $dateCreated,
         private ?DateTime $datePublished
-    ) { }
+    ) {
+    }
 
     public function id(): ArticleId
     {
@@ -67,5 +67,4 @@ class Article
             $datePublished
         );
     }
-
 }

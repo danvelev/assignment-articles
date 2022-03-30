@@ -8,5 +8,4 @@ use Exception;
 
 class ArticleNotFoundException extends Exception
 {
-
 }

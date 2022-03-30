@@ -10,11 +10,10 @@ use Src\Domain\User;
 
 class EloquentUserRepository implements UserRepository
 {
-
-
     public function __construct(
         private EloquentUserModel $eloquentUserModel
-    ) { }
+    ) {
+    }
 
     /**
      * @throws UserNotFoundException
@@ -31,7 +30,7 @@ class EloquentUserRepository implements UserRepository
             );
         } catch (ModelNotFoundException) {
             throw new UserNotFoundException(
-                sprintf("No user found with %d ", $userId), 404);
+                sprintf('No user found with %d ', $userId), 404);
         }
     }
 }

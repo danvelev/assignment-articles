@@ -12,7 +12,8 @@ class CommentIntention
         private User $visitor,
         private Article $article,
         private DateTime $dateCreated,
-    ) { }
+    ) {
+    }
 
     public function visitor(): User
     {
@@ -31,6 +32,6 @@ class CommentIntention
 
     public static function make(User $visitor, Article $article): self
     {
-        return new CommentIntention($visitor, $article, now());
+        return new self($visitor, $article, now());
     }
 }

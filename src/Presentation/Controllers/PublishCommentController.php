@@ -20,13 +20,11 @@ use Src\Presentation\Exceptions\InvalidPayloadException;
 
 class PublishCommentController extends AbstractController
 {
-
     public function __construct(
         private ArticleRepository $articleRepository,
         private UserRepository $userRepository,
         private CommentRepository $commentRepository,
-    )
-    {
+    ) {
     }
 
     public function __invoke(Request $request): JsonResponse
@@ -51,9 +49,8 @@ class PublishCommentController extends AbstractController
 
             $response = Response::json([
                 'message' => 'Comment Inserted successfully',
-                'comment_id' => $commentId
+                'comment_id' => $commentId,
             ], 201);
-
         } catch (InvalidPayloadException $e) {
             $response = Response::json([
                 'error_message' => $e->getMessage(),
@@ -79,13 +76,13 @@ class PublishCommentController extends AbstractController
      */
     private function validateData(array $data): void
     {
-        $validator = Validator::make($data,[
+        $validator = Validator::make($data, [
             'user_id' => 'required',
             'article_id' => 'required',
-            'message' => 'required'
+            'message' => 'required',
         ]);
 
-        if($validator->fails()) {
+        if ($validator->fails()) {
             throw new InvalidPayloadException($validator->errors(), 400);
         }
     }

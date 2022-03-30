@@ -4,11 +4,11 @@ namespace Src\Application\Commands;
 
 class CommentPublishedCommand
 {
-
     public function __construct(
         private int $visitorId,
         private int $articleId
-    ) { }
+    ) {
+    }
 
     public function getVisitorId(): int
     {

@@ -11,8 +11,8 @@ class PublishCommentService
 {
     public function __construct(
         private CommentRepository $commentRepository
-    )
-    { }
+    ) {
+    }
 
     public function publishComment(Article $article, User $visitor, string $message): int
     {

@@ -10,7 +10,8 @@ class User
         private UserId $id,
         private string $name,
         private string $email
-    ) { }
+    ) {
+    }
 
     public function id(): UserId
     {

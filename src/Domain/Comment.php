@@ -9,6 +9,7 @@ use Src\Domain\ValueObjects\CommentId;
 class Comment
 {
     const STATE_DRAFT = 'draft';
+
     const STATE_PUBLISH = 'publish';
 
     public function __construct(
@@ -17,7 +18,8 @@ class Comment
         private User $visitor,
         private Article $article,
         private string $state
-    ) { }
+    ) {
+    }
 
     public function id(): CommentId
     {
@@ -54,9 +56,9 @@ class Comment
         $this->state = self::STATE_PUBLISH;
     }
 
-    public static function make(int $id, string $message, User $visitor, Article $article): Comment
+    public static function make(int $id, string $message, User $visitor, Article $article): self
     {
-        return new Comment(
+        return new self(
             new CommentId($id),
             $message,
             $visitor,
@@ -64,7 +66,4 @@ class Comment
             self::STATE_PUBLISH
         );
     }
-
-
-
 }

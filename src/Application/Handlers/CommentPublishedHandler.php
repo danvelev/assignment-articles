@@ -9,7 +9,8 @@ class CommentPublishedHandler
 {
     public function __construct(
         private CommentIntentionRepository $commentIntentionRepository
-    ) { }
+    ) {
+    }
 
     public function handle(CommentPublishedCommand $command): void
     {

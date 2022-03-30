@@ -11,7 +11,8 @@ class EloquentCommentRepository implements CommentRepository
 {
     public function __construct(
         private EloquentCommentModel $eloquentCommentModel
-    ) { }
+    ) {
+    }
 
     /**
      * @throws CommentPublicationException
@@ -24,12 +25,12 @@ class EloquentCommentRepository implements CommentRepository
             'user_id' => $comment->visitor()->id()->value(),
         ]);
 
-        if($dbModel->save()) {
+        if ($dbModel->save()) {
             return $dbModel->id;
         }
 
         throw new CommentPublicationException(
-            sprintf("Comment of user %d could not be published to article ID: %d",
+            sprintf('Comment of user %d could not be published to article ID: %d',
                 $comment->visitor()->id()->value(),
                 $comment->article()->id()->value()), 500);
     }
