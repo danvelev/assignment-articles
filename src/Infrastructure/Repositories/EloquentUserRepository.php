@@ -17,7 +17,10 @@ class EloquentUserRepository implements UserRepository
         private EloquentUserModel $eloquentUserModel
     ) { }
 
-    public function findById(int $userId): ?User
+    /**
+     * @throws UserNotFoundException
+     */
+    public function findById(int $userId): User
     {
         try {
             $user = $this->eloquentUserModel::query()->findOrFail($userId);

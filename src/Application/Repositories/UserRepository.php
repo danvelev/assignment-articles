@@ -6,5 +6,5 @@ use Src\Domain\User;
 
 interface UserRepository
 {
-    public function findById(int $userId): ?User;
+    public function findById(int $userId): User;
 }
