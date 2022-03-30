@@ -54,7 +54,7 @@ class CommentIntentionTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function testCommentIntentionRequestWithBadRequest()
+    public function testCommentIntentionRequestWithInvalidPayload()
     {
         $response = $this->post('/api/comment/intended', [
             'user_id' => $this->user->id
