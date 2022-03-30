@@ -13,7 +13,7 @@ class ArticleTransformer
             'title' => $article->title(),
             'content' => $article->content()->value(),
             'author_id' => $article->author()->id()->value(),
-            'dateCreated' => $article->dateCreated()->format('Y-m-d H:i:s'),
+            'date_created' => $article->dateCreated()->format('Y-m-d H:i:s'),
         ];
     }
 }
