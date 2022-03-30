@@ -1,0 +1,11 @@
+parameters:
+    paths:
+        - app
+        - src
+        - tests
+    level: 8
+    inferPrivatePropertyTypeFromConstructor: true
+    checkMissingIterableValueType: false
+    excludePaths:
+        - %currentWorkingDirectory%/app/Providers/*
+        - %currentWorkingDirectory%/app/Http/*
