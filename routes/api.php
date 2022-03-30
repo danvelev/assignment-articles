@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Src\Presentation\Controllers\PublishCommentController;
-use Src\Presentation\Controllers\GetArticleByIdController;
 use Src\Presentation\Controllers\CommentIntendedController;
+use Src\Presentation\Controllers\GetArticleByIdController;
+use Src\Presentation\Controllers\PublishCommentController;
 
 /*
 |--------------------------------------------------------------------------
