@@ -11,7 +11,7 @@ class ArticleTest extends TestCase
         'title',
         'content',
         'author_id',
-        'dateCreated'
+        'date_created'
     ];
 
     public function testJsonResponseGetArticleById()
