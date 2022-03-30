@@ -14,3 +14,4 @@ yarn-error.log
 /.vscode
 /msqldata/*
 .deptrac.cache
+.php-cs-fixer.php
