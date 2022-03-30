@@ -2,9 +2,7 @@
 
 namespace Src\Application;
 
-use Src\Application\Repositories\ArticleRepository;
 use Src\Application\Repositories\CommentIntentionRepository;
-use Src\Application\Repositories\CommentRepository;
 use Src\Domain\Article;
 use Src\Domain\CommentIntention;
 use Src\Domain\User;
