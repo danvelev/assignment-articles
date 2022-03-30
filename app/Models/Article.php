@@ -15,12 +15,12 @@ class Article extends Model
         'title',
         'content',
         'user_id',
-        'published_at'
+        'published_at',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
-        'published_at' => 'datetime'
+        'published_at' => 'datetime',
     ];
 
     public function comments(): HasMany

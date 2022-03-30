@@ -13,7 +13,7 @@ class Comment extends Model
     protected $fillable = [
         'message',
         'user_id',
-        'article_id'
+        'article_id',
     ];
 
     public function article(): BelongsTo

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
-use Illuminate\Support\Facades\Queue;
 use Mockery;
 use Src\Application\Commands\CommentPublishedCommand;
 use Tests\TestCase;
@@ -18,6 +17,7 @@ class PublishCommentTest extends TestCase
     use RefreshDatabase;
 
     private Collection|Model $user;
+
     private Collection|Model $article;
 
     public function setUp(): void
@@ -43,7 +43,7 @@ class PublishCommentTest extends TestCase
         $response = $this->post(route('comment.publish', [
             'user_id' => $this->user->id,
             'article_id' => $this->article->id,
-            'message' => 'Random test text'
+            'message' => 'Random test text',
         ]));
 
         Bus::assertDispatched(CommentPublishedCommand::class);
@@ -58,7 +58,7 @@ class PublishCommentTest extends TestCase
         $response = $this->post(route('comment.publish', [
             'user_id' => $this->user->id,
             'article_id' => $this->article->id + 10,
-            'message' => 'Random test text'
+            'message' => 'Random test text',
         ]));
 
         Bus::assertNotDispatched(CommentPublishedCommand::class);
@@ -70,7 +70,7 @@ class PublishCommentTest extends TestCase
     {
         $response = $this->post(route('comment.publish', [
             'user_id' => $this->user->id,
-            'article_id' => $this->article->id
+            'article_id' => $this->article->id,
         ]));
 
         $response->assertStatus(400);

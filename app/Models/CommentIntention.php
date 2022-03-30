@@ -12,7 +12,7 @@ class CommentIntention extends Model
 
     protected $fillable = [
         'article_id',
-        'user_id'
+        'user_id',
     ];
 
     public function article(): BelongsTo

@@ -30,12 +30,10 @@ class ArticleTransformerTest extends TestCase
     public function isValidDateFormat(string $format, string $date): bool
     {
         $dateTime = \DateTime::createFromFormat($format, $date);
-        if(!$dateTime) {
+        if (! $dateTime) {
             return false;
         }
 
         return $dateTime->format($format) === $date;
     }
-
-
 }

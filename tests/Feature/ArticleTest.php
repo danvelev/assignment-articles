@@ -30,7 +30,7 @@ class ArticleTest extends TestCase
 
     public function testGetRequestWithNonExistingArticle(): void
     {
-        $response = $this->get(route('get.article.by.id',0));
+        $response = $this->get(route('get.article.by.id', 0));
 
         $response->assertStatus(404);
     }

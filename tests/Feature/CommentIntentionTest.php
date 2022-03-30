@@ -14,6 +14,7 @@ class CommentIntentionTest extends TestCase
     use RefreshDatabase;
 
     private Collection|Model $user;
+
     private Collection|Model $article;
 
     public function setUp(): void
@@ -29,7 +30,7 @@ class CommentIntentionTest extends TestCase
     {
         $response = $this->post(route('comment.intended', [
             'user_id' => $this->user->id,
-            'article_id' => $this->article->id
+            'article_id' => $this->article->id,
         ]));
 
         $response->assertStatus(200);
@@ -41,7 +42,7 @@ class CommentIntentionTest extends TestCase
 
         $response = $this->post(route('comment.intended', [
             'user_id' => $this->user->id,
-            'article_id' => $nonExistingId
+            'article_id' => $nonExistingId,
         ]));
 
         $response->assertStatus(404);
@@ -50,7 +51,7 @@ class CommentIntentionTest extends TestCase
     public function testCommentIntentionRequestWithInvalidPayload(): void
     {
         $response = $this->post('/api/comment/intended', [
-            'user_id' => $this->user->id
+            'user_id' => $this->user->id,
         ]);
 
         $response->assertStatus(400);
