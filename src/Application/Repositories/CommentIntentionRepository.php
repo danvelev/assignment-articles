@@ -10,5 +10,5 @@ interface CommentIntentionRepository
 {
     public function save(CommentIntention $commentIntention): void;
 
-    public function deleteAllWith(int $visitorId, int $articleId): bool;
+    public function deleteAllWith(int $visitorId, int $articleId): void;
 }

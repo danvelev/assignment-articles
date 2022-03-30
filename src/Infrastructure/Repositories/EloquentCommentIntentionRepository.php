@@ -22,9 +22,9 @@ class EloquentCommentIntentionRepository implements CommentIntentionRepository
         $dbModel->save();
     }
 
-    public function deleteAllWith(int $visitorId, int $articleId): bool
+    public function deleteAllWith(int $visitorId, int $articleId): void
     {
-        return $this->eloquentCommentIntentionModel::query()
+        $this->eloquentCommentIntentionModel::query()
             ->where('article_id', '=', $articleId)
             ->where('user_id', '=', $visitorId)
             ->delete();
