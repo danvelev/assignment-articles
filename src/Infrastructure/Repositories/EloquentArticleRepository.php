@@ -8,7 +8,6 @@ use Src\Application\Exceptions\ArticleNotFoundException;
 use Src\Application\Repositories\ArticleRepository;
 use Src\Domain\Article;
 use Src\Domain\User;
-use Src\Domain\ValueObjects\UserId;
 
 class EloquentArticleRepository implements ArticleRepository
 {
@@ -23,8 +22,7 @@ class EloquentArticleRepository implements ArticleRepository
         try {
             $article = $this->eloquentArticleModel::query()->findOrFail($articleId);
 
-            // TODO: Introduce DTO
-            $author = new User(new UserId($article->author->id), $article->author->name, $article->author->email);
+            $author = User::make($article->author->id, $article->author->name, $article->author->email);
 
             return Article::make(
                 $article->id,
@@ -38,12 +36,6 @@ class EloquentArticleRepository implements ArticleRepository
             throw new ArticleNotFoundException(
                 sprintf("No articles found with %d ", $articleId), 404);
         }
-    }
-
-    public function findAll(): ?array
-    {
-        // TODO: Implement findAll() method.
-        return null;
     }
 
     public function save(Article $article): void
