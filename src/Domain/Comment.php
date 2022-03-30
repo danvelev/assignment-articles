@@ -19,41 +19,26 @@ class Comment
         private string $state
     ) { }
 
-    /**
-     * @return CommentId
-     */
     public function id(): CommentId
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function message(): string
     {
         return $this->message;
     }
 
-    /**
-     * @return User
-     */
     public function visitor(): User
     {
         return $this->visitor;
     }
 
-    /**
-     * @return Article
-     */
     public function article(): Article
     {
         return $this->article;
     }
 
-    /**
-     * @return string
-     */
     public function state(): string
     {
         return $this->state;

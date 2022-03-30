@@ -12,25 +12,16 @@ class User
         private string $email
     ) { }
 
-    /**
-     * @return UserId
-     */
     public function id(): UserId
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function name(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function email(): string
     {
         return $this->email;

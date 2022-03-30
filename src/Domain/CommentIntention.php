@@ -14,25 +14,16 @@ class CommentIntention
         private DateTime $dateCreated,
     ) { }
 
-    /**
-     * @return User
-     */
     public function visitor(): User
     {
         return $this->visitor;
     }
 
-    /**
-     * @return Article
-     */
     public function article(): Article
     {
         return $this->article;
     }
 
-    /**
-     * @return DateTime
-     */
     public function dateCreated(): DateTime
     {
         return $this->dateCreated;
