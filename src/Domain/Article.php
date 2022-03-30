@@ -58,14 +58,20 @@ class Article
     }
 
     /**
-     * @return DateTime
+     * @return ?DateTime
      */
-    public function datePublished(): DateTime
+    public function datePublished(): ?DateTime
     {
         return $this->datePublished;
     }
 
-    public static function make(int $articleId, string $title, string $content, User $author, ?DateTime $dateCreated = null, ?DateTime $datePublished = null)
+    public static function make(
+        int $articleId,
+        string $title,
+        string $content,
+        User $author,
+        ?DateTime $dateCreated = null,
+        ?DateTime $datePublished = null): self
     {
         return new self(
             new ArticleId($articleId),
