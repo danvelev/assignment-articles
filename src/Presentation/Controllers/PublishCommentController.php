@@ -3,6 +3,7 @@
 namespace Src\Presentation\Controllers;
 
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Response;
@@ -28,7 +29,7 @@ class PublishCommentController extends AbstractController
     {
     }
 
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): JsonResponse
     {
         try {
             $data = $request->all();
