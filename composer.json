@@ -49,8 +49,10 @@
             "@php artisan key:generate --ansi"
         ],
         "check-ddd" : "php deptrac.phar",
-        "analyse": "vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=1G",
-        "check-cs": "./vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots",
+        "analyse": [
+            "vendor/bin/phpstan analyse -c phpstan.neon --memory-limit=1G",
+            "vendor/bin/php-cs-fixer fix -vvv --dry-run --show-progress=dots"
+        ],
         "fix": "./vendor/bin/php-cs-fixer fix -vvv --show-progress=dots"
     },
     "extra": {
