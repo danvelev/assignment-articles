@@ -6,6 +6,10 @@ parameters:
     level: 8
     inferPrivatePropertyTypeFromConstructor: true
     checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
     excludePaths:
         - %currentWorkingDirectory%/app/Providers/*
         - %currentWorkingDirectory%/app/Http/*
+    ignoreErrors:
+        - '#Access to an undefined property Illuminate\\Database\\Eloquent\\(.*)::\$.*#'
+        - '#Access to an undefined property App\\Models\\(.*)::\$.*#'
