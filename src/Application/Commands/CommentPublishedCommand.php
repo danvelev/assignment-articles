@@ -10,17 +10,11 @@ class CommentPublishedCommand
         private int $articleId
     ) { }
 
-    /**
-     * @return int
-     */
     public function getVisitorId(): int
     {
         return $this->visitorId;
     }
 
-    /**
-     * @return int
-     */
     public function getArticleId(): int
     {
         return $this->articleId;
