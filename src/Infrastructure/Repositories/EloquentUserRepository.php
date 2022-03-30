@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Src\Application\Exceptions\UserNotFoundException;
 use Src\Application\Repositories\UserRepository;
 use Src\Domain\User;
-use Src\Domain\ValueObjects\UserId;
 
 class EloquentUserRepository implements UserRepository
 {
