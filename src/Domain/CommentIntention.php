@@ -8,8 +8,6 @@ use DateTime;
 
 class CommentIntention
 {
-    private const TYPE = 'comment';
-
     public function __construct(
         private User $visitor,
         private Article $article,
