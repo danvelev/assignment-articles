@@ -65,4 +65,16 @@ class Article
         return $this->datePublished;
     }
 
+    public static function make(int $articleId, string $title, string $content, User $author, ?DateTime $dateCreated = null, ?DateTime $datePublished = null)
+    {
+        return new self(
+            new ArticleId($articleId),
+            $title,
+            new Content($content),
+            $author,
+            $dateCreated ?? now(),
+            $datePublished
+        );
+    }
+
 }
