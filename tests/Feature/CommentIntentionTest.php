@@ -7,9 +7,6 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Mockery;
-use Mockery\LegacyMockInterface;
-use Mockery\MockInterface;
 use Tests\TestCase;
 
 class CommentIntentionTest extends TestCase
@@ -18,7 +15,6 @@ class CommentIntentionTest extends TestCase
 
     private Collection|Model $user;
     private Collection|Model $article;
-    private LegacyMockInterface|MockInterface $mock;
 
     public function setUp(): void
     {
@@ -27,21 +23,10 @@ class CommentIntentionTest extends TestCase
         $this->user = User::factory()->create();
 
         $this->article = Article::factory()->create();
-
-        $this->mock = Mockery::mock('overload:EloquentCommentIntentionRepository');
-    }
-
-    public function tearDown(): void
-    {
-        parent::tearDown();
-
-        Mockery::close();
     }
 
     public function testCommentIntentionRequestWithExistingRecords(): void
     {
-        $this->mock->shouldReceive('save')->once();
-
         $response = $this->post(route('comment.intended', [
             'user_id' => $this->user->id,
             'article_id' => $this->article->id
