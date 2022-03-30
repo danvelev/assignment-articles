@@ -12,7 +12,7 @@ class ViewArticleService
     public function __construct(private ArticleRepository $repository)
     { }
 
-    public function findArticleById(int $articleId): ?Article
+    public function findArticleById(int $articleId): Article
     {
         return $this->repository->findById($articleId);
     }

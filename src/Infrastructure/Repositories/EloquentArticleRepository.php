@@ -18,7 +18,7 @@ class EloquentArticleRepository implements ArticleRepository
     /**
      * @throws ArticleNotFoundException
      */
-    public function findById(int $articleId): ?Article
+    public function findById(int $articleId): Article
     {
         try {
             $article = $this->eloquentArticleModel::query()->findOrFail($articleId);
