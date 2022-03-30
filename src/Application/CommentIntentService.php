@@ -16,7 +16,7 @@ class CommentIntentService
         private CommentIntentionRepository $commentIntentionRepository
     ) { }
 
-    public function saveCommentIntent(User $visitor, Article $article)
+    public function saveCommentIntent(User $visitor, Article $article): void
     {
         $commentIntention = CommentIntention::make($visitor, $article);
 
