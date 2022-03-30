@@ -18,7 +18,7 @@ class EloquentCommentRepository implements CommentRepository
      */
     public function save(Comment $comment): int
     {
-        $dbModel = new EloquentCommentModel([
+        $dbModel = new $this->eloquentCommentModel([
             'message' => $comment->message(),
             'article_id' => $comment->article()->id()->value(),
             'user_id' => $comment->visitor()->id()->value(),
