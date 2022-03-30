@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Bus;
 use Illuminate\Support\Facades\Queue;
@@ -14,6 +16,9 @@ use Tests\TestCase;
 class PublishCommentTest extends TestCase
 {
     use RefreshDatabase;
+
+    private Collection|Model $user;
+    private Collection|Model $article;
 
     public function setUp(): void
     {
@@ -31,7 +36,7 @@ class PublishCommentTest extends TestCase
         Mockery::close();
     }
 
-    public function testPublishCommentRequestWithExistingRecords()
+    public function testPublishCommentRequestWithExistingRecords(): void
     {
         Bus::fake();
 
@@ -46,7 +51,7 @@ class PublishCommentTest extends TestCase
         $response->assertStatus(201);
     }
 
-    public function testPublishCommentRequestWithNonExistingRecords()
+    public function testPublishCommentRequestWithNonExistingRecords(): void
     {
         Bus::fake();
 
@@ -61,7 +66,7 @@ class PublishCommentTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function testPublishCommentRequestWithInvalidPayload()
+    public function testPublishCommentRequestWithInvalidPayload(): void
     {
         $response = $this->post(route('comment.publish', [
             'user_id' => $this->user->id,

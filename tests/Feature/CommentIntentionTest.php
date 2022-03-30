@@ -4,13 +4,21 @@ namespace Tests\Feature;
 
 use App\Models\Article;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Mockery;
+use Mockery\LegacyMockInterface;
+use Mockery\MockInterface;
 use Tests\TestCase;
 
 class CommentIntentionTest extends TestCase
 {
     use RefreshDatabase;
+
+    private Collection|Model $user;
+    private Collection|Model $article;
+    private LegacyMockInterface|MockInterface $mock;
 
     public function setUp(): void
     {
@@ -30,7 +38,7 @@ class CommentIntentionTest extends TestCase
         Mockery::close();
     }
 
-    public function testCommentIntentionRequestWithExistingRecords()
+    public function testCommentIntentionRequestWithExistingRecords(): void
     {
         $this->mock->shouldReceive('save')->once();
 
@@ -42,7 +50,7 @@ class CommentIntentionTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCommentIntentionRequestWithNonExistingRecords()
+    public function testCommentIntentionRequestWithNonExistingRecords(): void
     {
         $nonExistingId = $this->article->id + 10;
 
@@ -54,7 +62,7 @@ class CommentIntentionTest extends TestCase
         $response->assertStatus(404);
     }
 
-    public function testCommentIntentionRequestWithInvalidPayload()
+    public function testCommentIntentionRequestWithInvalidPayload(): void
     {
         $response = $this->post('/api/comment/intended', [
             'user_id' => $this->user->id

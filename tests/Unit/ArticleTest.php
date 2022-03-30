@@ -9,17 +9,17 @@ use Tests\TestCase;
 
 class ArticleTest extends TestCase
 {
-    public function testArticleMake()
+    public function testArticleMake(): void
     {
         $dateCreated = \DateTime::createFromFormat('Y-m-d H:i:s', '2022-01-01 00:00:00');
 
         $user = User::make(1, 'name', 'email@mail.com');
         $article = Article::make(
-            1,
-            'title',
-            'content',
-            $user,
-            $dateCreated
+            articleId: 1,
+            title: 'title',
+            content: 'content',
+            author: $user,
+            dateCreated: $dateCreated ?: null
         );
 
         Assert::assertNotEmpty($article);
@@ -28,7 +28,7 @@ class ArticleTest extends TestCase
         Assert::assertEquals($dateCreated, $article->dateCreated());
     }
 
-    public function testArticleMakeWithoutDate()
+    public function testArticleMakeWithoutDate(): void
     {
         $user = User::make(1, 'name', 'email@mail.com');
         $article = Article::make(

@@ -13,7 +13,7 @@ use Tests\TestCase;
 
 class ArticleTransformerTest extends TestCase
 {
-    public function testArticleTransform()
+    public function testArticleTransform(): void
     {
         $user = new User(new UserId(1), 'name', 'random@email.com');
         $article = new Article(new ArticleId(1), 'long text', new Content('long content'), $user, now(), now());
@@ -30,6 +30,10 @@ class ArticleTransformerTest extends TestCase
     public function isValidDateFormat(string $format, string $date): bool
     {
         $dateTime = \DateTime::createFromFormat($format, $date);
+        if(!$dateTime) {
+            return false;
+        }
+
         return $dateTime->format($format) === $date;
     }
 

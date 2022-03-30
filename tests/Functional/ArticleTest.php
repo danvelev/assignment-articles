@@ -14,7 +14,7 @@ class ArticleTest extends TestCase
         'date_created'
     ];
 
-    public function testJsonResponseGetArticleById()
+    public function testJsonResponseGetArticleById(): void
     {
         $article = Article::factory()->create();
 
