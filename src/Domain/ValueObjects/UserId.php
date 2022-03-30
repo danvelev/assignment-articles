@@ -2,13 +2,7 @@
 
 namespace Src\Domain\ValueObjects;
 
-class UserId implements NumericId
+final class UserId extends NumericId
 {
-    public function __construct(private int $value)
-    { }
 
-    public function value(): int
-    {
-        return $this->value;
-    }
 }

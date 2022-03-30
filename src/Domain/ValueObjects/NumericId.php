@@ -2,7 +2,13 @@
 
 namespace Src\Domain\ValueObjects;
 
-interface NumericId
+abstract class NumericId
 {
+    public function __construct(protected int $value)
+    { }
 
+    public function value(): int
+    {
+        return $this->value;
+    }
 }
