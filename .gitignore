@@ -12,6 +12,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-/msqldata/*
+/msqldata
 .deptrac.cache
 .php-cs-fixer.cache
