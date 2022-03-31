@@ -1,64 +1,104 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Setup
 
-## About Laravel
+**NOTE**: If you are running Mac with M1 chip, MySQL container could have some issues, so you will need to download and run it natively on your local machine.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Requirements:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Composer](https://getcomposer.org/doc/00-intro.md)
+- [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/install/)
+- (*Mac with M1 chip*) [MySQL](https://dev.mysql.com/downloads/mysql/)
+- (*Mac with M1 chip*) Once you have MySQL setup up and running, make sure you have setup testing DB as well.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Installation:
 
-## Learning Laravel
+- Clone repository
+- Run `composer install`
+- Make sure you have setup all the necessary DB env variables in .env file
+- Run `docker-compose -up` (For M1 run `docker-compose up nginx php`)
+- Run `docker exec php php artisan migrate` to run migrations
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Project should be available at http://localhost:8088/
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Thought process
 
-## Laravel Sponsors
+Here is quick overview of my ideas and assumptions while developing this project
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Since assignment was mainly evolving around the visitors of a website and tracking their comment intentions, I have not introduced any functionality around publishing and deleting article.
+Hence, my main focus was around the following domain events:
+- Article Viewed/Opened
+- Comment Intended by Visitor
+- Comment published
+- Comment Intention removed (as sales person will only be interested in non-published comments)
 
-### Premium Partners
+Also please see below the outcome of my small event storming session, where I have mapped out the process that I think the solution should solve. 
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+<img src="docs/event-storming.png" width="900" height="350"/>
 
-## Contributing
+The dark yellow stickies represent the aggregates
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+The light yellow is the actor
 
-## Code of Conduct
+The blue stickies are the commands/actions
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+The purple stickies are the business rules.
 
-## Security Vulnerabilities
+The orange stickies are the domain events.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+### Assumptions
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+I have based and created my solution based on the following assumptions
+
+- Publishing and tracking actions evolving around the Article are managed by another service
+- Visitor is not interested in viewing other comments related to the Article, hence does not need to reply to other comments
+- Sales team is not interested in the content of comment intention, but only in the user and the article to which had an intention
+- Sales team is only interested in non-published comments, meaning that once comment is published user's intentions to comment should be deleted
+- Having user access roles (e.g. author, visitor, sales person) is out of scope
+- Authentication is out of scope
+- Front end is going to be handled separately, there is the sole need of a RESTFul API backend system
+
+### Architecture
+
+My main idea when developing the project was to have a clean and solid architecture with as little dependencies as possible to the Laravel framework.
+Hence, if, for instance, next year it is decided to move the project to Symfony framework, that migration should be possible with very little adjustments to the code base.
+
+## Testing the project
+
+### Useful Commands
+
+- `composer analyse` - to run static code analysis tool (phpStan + Deptrac)
+- `composer check-ddd` - to check project dependencies with Deptrac (configuration can be found in `depfile.yaml`)
+- `composer check-cs` - to check code styling (just checking for issues)
+- `composer fix` - to resolve any code styling issues (will write to files)
+- `docker exec php vendor/bin/phpunit tests/` - to run all test in the folder
+
+### API endpoints
+
+- `GET api/article/{id}`
+
+
+- `POST api/comment/intended`
+
+    Request Body: `{
+  "user_id": 1,
+  "article_id": 1
+  }`
+
+
+- `POST api/comment/publish`
+
+    Request Body: `{
+"user_id": 1,
+"article_id": 1,
+"message": "What a great article!"
+}`
+
+
+## If I had more time, I would have
+
+- added a report so that sales team can download
+- introduced integration tests to test the DB/Eloquent
+- added tests on the command bus, to make sure messages are dispatched and handled
+- Reduce the amount of dependencies on Laravel in the tests
+- introduced behat to do the Feature/System tests. (seems like laravel 9 introduced psr/container dependency which is not yet supported by Behat )
