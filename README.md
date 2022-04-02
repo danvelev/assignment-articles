@@ -52,7 +52,7 @@ I have based and created my solution based on the following assumptions
 
 - Publishing and tracking actions evolving around the Article are managed by another service
 - Visitor is not interested in viewing other comments related to the Article, hence does not need to reply to other comments
-- Sales team is not interested in the content of comment intention, but only in the user and the article to which had an intention
+- Sales team is not interested in the content of comment intention, but only in the user and the article to which had the intention
 - Sales team is only interested in non-published comments, meaning that once comment is published user's intentions to comment should be deleted
 - Having user access roles (e.g. author, visitor, sales person) is out of scope
 - Authentication is out of scope
