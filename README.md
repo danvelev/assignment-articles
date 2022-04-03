@@ -15,6 +15,7 @@
 - Clone repository
 - Run `composer install`
 - Clone .env.example file and rename it to .env
+- Run `php artisan key:generate`
 - Make sure you have setup all the necessary DB env variables in .env file (+ create a DB for the tests)
 - Run `docker-compose -up` (For M1 run `docker-compose up nginx php`)
 - Run `docker exec php php artisan migrate` to run migrations
