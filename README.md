@@ -14,9 +14,11 @@
 
 - Clone repository
 - Run `composer install`
-- Make sure you have setup all the necessary DB env variables in .env file
+- Clone .env.example file and rename it to .env
+- Make sure you have setup all the necessary DB env variables in .env file (+ create a DB for the tests)
 - Run `docker-compose -up` (For M1 run `docker-compose up nginx php`)
 - Run `docker exec php php artisan migrate` to run migrations
+- Run `docker exec php php artisan db:seed` to run seeders
 
 Project should be available at http://localhost:8088/
 
@@ -71,9 +73,12 @@ Hence, if, for instance, next year it is decided to move the project to Symfony 
 - `composer check-ddd` - to check project dependencies with Deptrac (configuration can be found in `depfile.yaml`)
 - `composer check-cs` - to check code styling (just checking for issues)
 - `composer fix` - to resolve any code styling issues (will write to files)
-- `docker exec php vendor/bin/phpunit tests/` - to run all test in the folder
+- `docker exec php php artisan test` - to run all test in the folder
 
 ### API endpoints
+In docs folder you can also find an exported Postman collection, which you can use to run/test the API calls.
+
+List of available endpoints in this project:
 
 - `GET api/article/{id}`
 
